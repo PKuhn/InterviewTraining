@@ -1,7 +1,7 @@
-from heap import MinHeap
+from heap import Heap
 
 def test_add():
-    heap = MinHeap()
+    heap = Heap()
     heap.add(2)
     heap.add(3)
     heap.add(1)
@@ -10,7 +10,7 @@ def test_add():
     assert heap.contains(3)
 
 def test_heap_ordered():
-    heap = MinHeap()
+    heap = Heap()
     heap.add(2)
     heap.add(7)
     heap.add(1)

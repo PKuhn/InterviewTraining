@@ -1,7 +1,10 @@
-class MinHeap:
-    def __init__(self):
+import operator
+
+class Heap:
+    def __init__(self, capacity=10, compare=operator.lt):
         self.capacity = 10
         self.elements = [None] * self.capacity
+        self.compare = compare
         self.size = 0
 
     def __len__(self):
@@ -37,13 +40,13 @@ class MinHeap:
         right_child_pos = 2 * pos + 2
         # Only left child is defined
         if right_child_pos == self.size:
-            if self.elements[left_child_pos] < self.elements[pos]:
+            if self.compare(self.elements[left_child_pos], self.elements[pos]):
                 self._swap(left_child_pos, pos)
                 self._bubble_down(left_child_pos)
         else:
             left_child = self.elements[left_child_pos] 
             right_child = self.elements[right_child_pos]
-            if left_child < right_child:
+            if self.compare(left_child, right_child):
                 if not self._is_valid_parent(pos, left_child_pos):
                     self._swap(left_child_pos, pos)
                     self._bubble_down(left_child_pos)
@@ -53,7 +56,7 @@ class MinHeap:
                     self._bubble_down(right_child_pos)
 
     def _is_valid_parent(self, parent_pos, child_pos):
-        return self.elements[parent_pos] < self.elements[child_pos]
+        return self.compare(self.elements[parent_pos], self.elements[child_pos])
 
     def _is_leaf(self, pos):
         return pos * 2 + 1 >= self.size 
@@ -73,3 +76,4 @@ class MinHeap:
 
     def _decrease_size(self):
         # TODO implement
+        pass
